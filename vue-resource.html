@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/vue-resource/dist/vue-resource.js"></script>
+  <link rel="stylesheet" href="src/css/bootstrap.css">
+</head>
+<body>
+  <div id="app"class="container">
+    <h1>vue-resource插件讲解</h1>
+    <button  class="btn btn-primary"  v-on:click="get">Get请求</button>
+    <a href="javascript:;" class="btn-primary btn" v-on:click="post">Post请求</a>
+    <a href="javascript:;" class="btn btn-primary">Json请求</a>
+    <div>{{msg}}</div>
+  </div>
+</body>
+<script>
+
+    new  Vue({
+      el:"#app",
+      data:{
+        msg:'',
+      },
+      methods:{
+        get:function () {
+          this.$http.get("package.json",{
+            params:{
+              userId:"101"
+            },
+            headers:{
+              taken:"abvd"
+            }
+          }).then(res=>{
+            this.msg = res.data},error=>
+            {
+              this.msg=error
+            })
+        },
+      post:function () {
+        this.$http.post("package.json",{
+          userId:'102'
+        },{
+          headers:{
+            access_token:'abc'
+          }
+        }).then(function (res) {
+          this.msg = res;
+        })
+      }
+
+
+
+
+    }});
+</script>
+</html>
